@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedALiftAPI\\NeedALiftAPI\\NeedALiftAPI.csproj": {}
+    "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\NeedALiftAPI.csproj": {}
   },
   "projects": {
-    "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedALiftAPI\\NeedALiftAPI\\NeedALiftAPI.csproj": {
+    "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\NeedALiftAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedALiftAPI\\NeedALiftAPI\\NeedALiftAPI.csproj",
+        "projectUniqueName": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\NeedALiftAPI.csproj",
         "projectName": "NeedALiftAPI",
-        "projectPath": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedALiftAPI\\NeedALiftAPI\\NeedALiftAPI.csproj",
+        "projectPath": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\NeedALiftAPI.csproj",
         "packagesPath": "C:\\Users\\Jacques Geldenhuys\\.nuget\\packages\\",
-        "outputPath": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedALiftAPI\\NeedALiftAPI\\obj\\",
+        "outputPath": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

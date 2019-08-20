@@ -43,12 +43,12 @@ namespace NeedALiftAPI.Controllers
         {
             _liftservice.Create(lift);
 
-            return CreatedAtRoute("GetBook", new { id = lift.Id.ToString() }, lift);
+            return CreatedAtRoute("GetLift", new { id = lift.Id.ToString() }, lift);
         }
 
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, RequestLift bookIn)
+        public IActionResult Update(string id, RequestLift liftIn)
         {
             var book = _liftservice.Get(id);
 
@@ -57,7 +57,7 @@ namespace NeedALiftAPI.Controllers
                 return NotFound();
             }
 
-            _liftservice.Update(id, bookIn);
+            _liftservice.Update(id, liftIn);
 
             return NoContent();
         }
@@ -65,14 +65,14 @@ namespace NeedALiftAPI.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            var book = _liftservice.Get(id);
+            var lift = _liftservice.Get(id);
 
-            if (book == null)
+            if (lift == null)
             {
                 return NotFound();
             }
 
-            _liftservice.Remove(book.Id);
+            _liftservice.Remove(lift.Id);
 
             return NoContent();
         }
