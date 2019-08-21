@@ -13,8 +13,11 @@ namespace NeedALiftAPI.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        public string userId { get; set; }
         public string FName { get; set; }//
         public string SName { get; set; }//
+
+        public string Date { get; set; }
         public string StartDest { get; set; }
         public string EndDest { get; set; }
 
