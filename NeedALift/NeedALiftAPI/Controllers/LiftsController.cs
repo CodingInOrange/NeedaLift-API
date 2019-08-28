@@ -38,9 +38,9 @@ namespace NeedALiftAPI.Controllers
             return lift;
         }
 
-        [Route("api/lifts/Create")]
+       // [Route("api/lifts/")]
         [HttpPost]
-        public ActionResult<RequestLift> Create(RequestLift lift)
+        public ActionResult<RequestLift> Create([FromBody]RequestLift lift)
         {
             _liftservice.Create(lift);
 
