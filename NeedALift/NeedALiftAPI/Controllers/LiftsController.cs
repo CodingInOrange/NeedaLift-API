@@ -38,7 +38,6 @@ namespace NeedALiftAPI.Controllers
             return lift;
         }
 
-       // [Route("api/lifts/")]
         [HttpPost]
         public ActionResult<RequestLift> Create([FromBody]RequestLift lift)
         {
