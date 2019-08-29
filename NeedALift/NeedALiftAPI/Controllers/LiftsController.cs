@@ -51,9 +51,9 @@ namespace NeedALiftAPI.Controllers
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, RequestLift liftIn)
         {
-            var book = _liftservice.Get(id);
+            var lift = _liftservice.Get(id);
 
-            if (book == null)
+            if (lift == null)
             {
                 return NotFound();
             }

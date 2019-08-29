@@ -14,16 +14,12 @@ namespace NeedALiftAPI.Models
         public string Id { get; set; }
 
         public string userId { get; set; }
-        public string FName { get; set; }//
-        public string SName { get; set; }//
+        public string From { get; set; }//
+        public string To { get; set; }//
 
         public string Date { get; set; }
-        public string StartDest { get; set; }
-        public string EndDest { get; set; }
-
-        //date
         public string Time { get; set; }
-        public int Space { get; set; }
+        public int People { get; set; }
         public string Cost { get; set; }
         public string Comment { get; set; }
 
