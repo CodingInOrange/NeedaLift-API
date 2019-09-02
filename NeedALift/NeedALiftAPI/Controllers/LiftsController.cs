@@ -38,6 +38,21 @@ namespace NeedALiftAPI.Controllers
             return lift;
         }
 
+      // [Route("api/lifts/search/")]
+        [HttpGet(template: "{from}/{to}")]
+        public async Task<IEnumerable<RequestLift>> Get(string from, string to)
+        {
+            var lift = _liftservice.Get(from, to);
+            //if (lift == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return await lift ?? new List<RequestLift>();
+        }
+
+
+
         [HttpPost]
         public ActionResult<RequestLift> Create([FromBody]RequestLift lift)
         {

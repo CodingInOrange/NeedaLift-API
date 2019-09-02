@@ -14,8 +14,8 @@ namespace NeedALiftAPI.Models
         public string Id { get; set; }
 
         public string userId { get; set; }
-        public string From { get; set; }//
-        public string To { get; set; }//
+        public string From { get; set; }
+        public string To { get; set; }
 
         public DateTime Date { get; set; }
         public string Time { get; set; }

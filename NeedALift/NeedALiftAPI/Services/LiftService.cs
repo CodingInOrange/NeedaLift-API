@@ -39,5 +39,21 @@ namespace NeedALiftAPI.Services
 
         public void Remove(string id) =>
             _lifts.DeleteOne(lift => lift.Id == id);
+
+        public List<RequestLift> SearchLifts(string from, string to) =>
+            _lifts.Find(lift => lift.From == from && lift.To == to).ToList();
+
+        public async Task<IEnumerable<RequestLift>> Get(string from, string to)
+        {
+            try
+            {
+                var query = _lifts.Find(lift => lift.From.Contains(from) && lift.To.Contains(to));
+                return await query.ToListAsync();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
