@@ -39,7 +39,7 @@ namespace NeedALiftAPI.Controllers
         }
 
       // [Route("api/lifts/search/")]
-        [HttpGet(template: "{from}/{to}")]
+        [HttpGet(template: "{from},{to}")]
         public async Task<IEnumerable<RequestLift>> Get(string from, string to)
         {
             var lift = _liftservice.Get(from, to);
