@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using NeedALiftAPI.Models;
 using NeedALiftAPI.Services;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace NeedALiftAPI.Controllers
 {
@@ -38,15 +37,10 @@ namespace NeedALiftAPI.Controllers
             return lift;
         }
 
-      // [Route("api/lifts/search/")]
         [HttpGet(template: "{from}/{to}")]
         public async Task<IEnumerable<RequestLift>> Get(string from, string to)
         {
             var lift = _liftservice.Get(from, to);
-            //if (lift == null)
-            //{
-            //    return NotFound();
-            //}
 
             return await lift ?? new List<RequestLift>();
         }

@@ -10,13 +10,15 @@ namespace NeedALiftAPI.Services
     public class LiftService
     {
         private readonly IMongoCollection<RequestLift> _lifts;
+        private readonly IMongoCollection<LiftConfirmation> _requests;
 
         public LiftService(INeedALiftDBSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DBName);
 
-            _lifts = database.GetCollection<RequestLift>(settings.CollectionName);
+            _lifts = database.GetCollection<RequestLift>(settings.CollectionName1);
+            _requests = database.GetCollection<LiftConfirmation>(settings.CollectionName2);
         }
 
         public List<RequestLift> Get() =>
@@ -27,7 +29,14 @@ namespace NeedALiftAPI.Services
 
         public RequestLift Create(RequestLift request)
         {
+            LiftConfirmation confirmation = new LiftConfirmation
+            {
+                Id = request.Id,
+                UserIdCreated = request.userId
+            };
+
             _lifts.InsertOne(request);
+            _requests.InsertOne(confirmation);
             return request;
         }
 
