@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using NeedALiftAPI.Models;
     
@@ -11,6 +12,8 @@ namespace NeedALiftAPI.Services
     {
         private readonly IMongoCollection<RequestLift> _lifts;
         private readonly IMongoCollection<LiftConfirmation> _requests;
+        
+
 
         public LiftService(INeedALiftDBSettings settings)
         {
@@ -39,6 +42,7 @@ namespace NeedALiftAPI.Services
             _requests.InsertOne(confirmation);
             return request;
         }
+
 
         public void Update(string id, RequestLift liftIn) =>
             _lifts.ReplaceOne(lift => lift.Id == id,liftIn);

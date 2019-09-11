@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace NeedALiftAPI.Models
 {
@@ -12,9 +13,24 @@ namespace NeedALiftAPI.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+        [BsonRequired]
+        [EmailAddress]
         public string UserId { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
+    }
+
+    public class UsersDTO
+    {
+        [Required]
+        [EmailAddress]
+        public string UserId { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

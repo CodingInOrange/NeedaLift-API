@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NeedALiftAPI.Models;
 using NeedALiftAPI.Services;
-
+using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.Extensions.Options;
 
 namespace NeedALiftAPI.Controllers
 {
@@ -14,10 +19,16 @@ namespace NeedALiftAPI.Controllers
     public class LiftsController : ControllerBase
     {
         private readonly LiftService _liftservice;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        private readonly INeedALiftDBSettings _settings;
 
-        public LiftsController(LiftService service)
+        public LiftsController(LiftService service, IUserService uService, IMapper mapper, IOptions<NeedALiftDBSettings> settings)
         {
             _liftservice = service;
+            _userService = uService;
+            _mapper = mapper;
+            _settings = settings.Value;
         }
 
         [HttpGet]
@@ -55,6 +66,58 @@ namespace NeedALiftAPI.Controllers
             return CreatedAtRoute("GetLift", new { id = lift.Id.ToString() }, lift);
         }
 
+        [HttpPost("Register"),Route("Register")]
+        public ActionResult<Users> Create([FromBody]UsersDTO userdto)
+        {
+            var user = _mapper.Map<Users>(userdto);
+            var exist = _userService.Get(userdto.UserId.ToString());
+            try
+            {
+                if(exist != null)
+                {
+                    return BadRequest();
+                }
+                _userService.Create(user, userdto.Password);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPost("authenticate"),Route("Authentication")]
+        public IActionResult Authenticate([FromBody]UsersDTO userDto)
+        {
+            var user = _userService.Authenticate(userDto.UserId, userDto.Password);
+
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_settings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            // return basic user info (without password) and token to store client side
+            return Ok(new
+            {
+                Id = user.Id,
+                UserId = user.UserId,
+                FName = user.FName,
+                LName = user.LName,
+                Token = tokenString
+            });
+        }
 
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, RequestLift liftIn)
