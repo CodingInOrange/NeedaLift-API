@@ -35,6 +35,10 @@ namespace NeedALiftAPI.Controllers
         public ActionResult<List<RequestLift>> Get() =>
             _liftservice.Get();
 
+        [HttpGet,Route("Users")]
+        public ActionResult<List<Users>> GetUser() =>
+           _userService.Get();
+
         [HttpGet("{id:length(24)}",Name = "GetLift")]
         public ActionResult<RequestLift> Get(string id)
         {
@@ -56,7 +60,12 @@ namespace NeedALiftAPI.Controllers
             return await lift ?? new List<RequestLift>();
         }
 
-
+        [HttpGet,Route("UserLifts")]
+        public async Task<IEnumerable<LiftConfirmation>> GetUserLifts(string id)
+        {
+            var userlifts = _liftservice.GetUserLifts(id);
+            return await userlifts ?? new List<LiftConfirmation>();
+        }
 
         [HttpPost]
         public ActionResult<RequestLift> Create([FromBody]RequestLift lift)
@@ -78,7 +87,7 @@ namespace NeedALiftAPI.Controllers
                     return BadRequest();
                 }
                 _userService.Create(user, userdto.Password);
-                return Ok();
+                return _userService.Authenticate(user.UserId, userdto.Password);
             }
             catch(Exception e)
             {

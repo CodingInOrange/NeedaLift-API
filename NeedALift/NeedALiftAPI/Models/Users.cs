@@ -14,7 +14,7 @@ namespace NeedALiftAPI.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         [BsonRequired]
-        [EmailAddress]
+        //[EmailAddress]
         public string UserId { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
