@@ -84,14 +84,14 @@ namespace NeedALiftAPI.Controllers
             {
                 if(exist != null)
                 {
-                    return BadRequest();
+                    return BadRequest(new { message = "User already exists" });
                 }
                 _userService.Create(user, userdto.Password);
                 return _userService.Authenticate(user.UserId, userdto.Password);
             }
             catch(Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(new { message = "User already exists" });
             }
         }
 

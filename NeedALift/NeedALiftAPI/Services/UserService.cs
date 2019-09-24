@@ -37,11 +37,11 @@ namespace NeedALiftAPI.Services
 
             // check if username exists
             if (user == null)
-                throw new ArgumentException("Username already exists");
+                return null;
 
             // check if password is correct
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                throw new ArgumentException("Password is incorrect");
+                return null;
 
             // authentication successful
             return user;
