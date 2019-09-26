@@ -61,7 +61,7 @@ namespace NeedALiftAPI.Controllers
         }
 
         [HttpGet,Route("UserLifts")]
-        public async Task<IEnumerable<LiftConfirmation>> GetUserLifts(string id)
+        public async Task<IEnumerable<LiftConfirmation>> UserLifts(string id)
         {
             var userlifts = _liftservice.GetUserLifts(id);
             return await userlifts ?? new List<LiftConfirmation>();
@@ -76,7 +76,7 @@ namespace NeedALiftAPI.Controllers
         }
 
         [HttpPost("Register"),Route("Register")]
-        public ActionResult<Users> Create([FromBody]UsersDTO userdto)
+        public IActionResult Create([FromBody]UsersDTO userdto)
         {
             var user = _mapper.Map<Users>(userdto);
             var exist = _userService.Get(userdto.UserId.ToString());
@@ -87,7 +87,8 @@ namespace NeedALiftAPI.Controllers
                     return BadRequest(new { message = "User already exists" });
                 }
                 _userService.Create(user, userdto.Password);
-                return _userService.Authenticate(user.UserId, userdto.Password);
+                return Authenticate(userdto);
+                
             }
             catch(Exception e)
             {
@@ -105,13 +106,14 @@ namespace NeedALiftAPI.Controllers
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_settings.Secret);
+            var date = DateTime.UtcNow.AddDays(7);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = date.AddTicks(-(date.Ticks % TimeSpan.TicksPerSecond)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -124,8 +126,9 @@ namespace NeedALiftAPI.Controllers
                 UserId = user.UserId,
                 FName = user.FName,
                 LName = user.LName,
-                Token = tokenString
-            });
+                Token = tokenString,
+                TokenExpiry = tokenDescriptor.Expires.Value
+        }); 
         }
 
         [HttpPut("{id:length(24)}")]
