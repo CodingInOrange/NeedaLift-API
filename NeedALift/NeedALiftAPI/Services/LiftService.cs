@@ -30,20 +30,32 @@ namespace NeedALiftAPI.Services
         public RequestLift Get(string id) =>
             _lifts.Find(lift => lift.Id == id).FirstOrDefault();
 
-        public async Task<IEnumerable<LiftConfirmation>> GetUserLifts(string id)
+        //public async Task<IEnumerable<LiftConfirmation>> GetUserLifts(string id)
+        //{
+        //    try
+        //    {
+        //        var lifts = _requests.Find(user => user.UserIdCreated.Contains(id));
+        //        return await lifts.ToListAsync();
+        //    }
+        //    catch(Exception e)
+        //    {
+        //        throw e;
+        //    }
+
+        //}
+        public async Task<IEnumerable<RequestLift>> GetUserLifts(string id)
         {
             try
             {
-                var lifts = _requests.Find(user => user.UserIdCreated == id);
-                return await lifts.ToListAsync();
+                var query = _lifts.Find(lift => lift.userId == id);
+                return await query.ToListAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
-          
         }
-            
+
 
         public RequestLift Create(RequestLift request)
         {
@@ -67,9 +79,6 @@ namespace NeedALiftAPI.Services
 
         public void Remove(string id) =>
             _lifts.DeleteOne(lift => lift.Id == id);
-
-        public List<RequestLift> SearchLifts(string from, string to) =>
-            _lifts.Find(lift => lift.From == from && lift.To == to).ToList();
 
         public async Task<IEnumerable<RequestLift>> Get(string from, string to)
         {

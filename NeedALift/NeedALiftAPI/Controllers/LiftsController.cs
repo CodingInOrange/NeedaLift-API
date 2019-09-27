@@ -60,11 +60,11 @@ namespace NeedALiftAPI.Controllers
             return await lift ?? new List<RequestLift>();
         }
 
-        [HttpGet,Route("UserLifts")]
-        public async Task<IEnumerable<LiftConfirmation>> UserLifts(string id)
+        [HttpGet("{userId}"),Route("UserLifts")]
+        public async Task<IEnumerable<RequestLift>> UserLifts(RequestLift uId)
         {
-            var userlifts = _liftservice.GetUserLifts(id);
-            return await userlifts ?? new List<LiftConfirmation>();
+            var userlifts = _liftservice.GetUserLifts(uId.userId);
+            return await userlifts ?? new List<RequestLift>();
         }
 
         [HttpPost]
@@ -131,7 +131,7 @@ namespace NeedALiftAPI.Controllers
         }); 
         }
 
-        [HttpPut("{id:length(24)}")]
+        [HttpPut("{id:length(24)}"),Route("UpdateLift")]
         public IActionResult Update(string id, RequestLift liftIn)
         {
             var lift = _liftservice.Get(id);
@@ -146,7 +146,7 @@ namespace NeedALiftAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id:length(24)}")]
+        [HttpDelete("{id:length(24)}"),Route("DeleteLift")]
         public IActionResult Delete(string id)
         {
             var lift = _liftservice.Get(id);
