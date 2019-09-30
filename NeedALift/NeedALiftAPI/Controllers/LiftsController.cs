@@ -146,10 +146,10 @@ namespace NeedALiftAPI.Controllers
             return Ok("Lift updated succesfully!");
         }
 
-        [HttpDelete("{id:length(24)}"),Route("DeleteLift")]
-        public IActionResult Delete(string id)
+        [HttpDelete,Route("DeleteLift")]
+        public IActionResult Delete(RequestLift id)
         {
-            var lift = _liftservice.Get(id);
+            var lift = _liftservice.Get(id.Id);
 
             if (lift == null)
             {

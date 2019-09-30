@@ -30,19 +30,6 @@ namespace NeedALiftAPI.Services
         public RequestLift Get(string id) =>
             _lifts.Find(lift => lift.Id == id).FirstOrDefault();
 
-        //public async Task<IEnumerable<LiftConfirmation>> GetUserLifts(string id)
-        //{
-        //    try
-        //    {
-        //        var lifts = _requests.Find(user => user.UserIdCreated.Contains(id));
-        //        return await lifts.ToListAsync();
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        throw e;
-        //    }
-
-        //}
         public async Task<IEnumerable<RequestLift>> GetUserLifts(string id)
         {
             try
