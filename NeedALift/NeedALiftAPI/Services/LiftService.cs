@@ -71,8 +71,8 @@ namespace NeedALiftAPI.Services
         }
 
 
-        public void Update(string id, RequestLift liftIn) =>
-            _lifts.ReplaceOne(lift => lift.Id == id,liftIn);
+        public void Update(RequestLift liftIn) =>
+            _lifts.ReplaceOne(lift => lift.Id == liftIn.Id,liftIn);
 
         public void Remove(RequestLift liftIn) =>
             _lifts.DeleteOne(lift => lift.Id == liftIn.Id);

@@ -25,3 +25,4 @@ D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\Nee
 D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.RazorTargetAssemblyInfo.cache
 D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.dll
 D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.pdb
+D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.csprojAssemblyReference.cache

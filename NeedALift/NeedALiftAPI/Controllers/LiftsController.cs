@@ -132,18 +132,18 @@ namespace NeedALiftAPI.Controllers
         }
 
         [HttpPut("{id:length(24)}"),Route("UpdateLift")]
-        public IActionResult Update(string id, RequestLift liftIn)
+        public IActionResult Update(RequestLift liftIn)
         {
-            var lift = _liftservice.Get(id);
+            var lift = _liftservice.Get(liftIn.Id);
 
             if (lift == null)
             {
                 return NotFound();
             }
 
-            _liftservice.Update(id, liftIn);
+            _liftservice.Update(liftIn);
 
-            return NoContent();
+            return Ok("Lift updated succesfully!");
         }
 
         [HttpDelete("{id:length(24)}"),Route("DeleteLift")]
