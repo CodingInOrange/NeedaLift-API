@@ -143,7 +143,7 @@ namespace NeedALiftAPI.Controllers
 
             _liftservice.Update(liftIn);
 
-            return Ok("Lift updated succesfully!");
+            return Ok(new { message = "Lift updated succesfully!" });
         }
 
         [HttpDelete,Route("DeleteLift")]
