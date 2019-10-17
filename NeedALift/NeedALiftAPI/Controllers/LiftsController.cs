@@ -160,5 +160,13 @@ namespace NeedALiftAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpPut(template:"{user}/{lift}"), Route("RequestLift")]
+        public IActionResult RequestLift(Users user, RequestLift lift)
+        {
+            _liftservice.LiftRequests(user, lift);
+
+            return Ok("Lift request sent!");
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace NeedALiftAPI.Models
         public string UserId { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
+        public string Rating { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
     }

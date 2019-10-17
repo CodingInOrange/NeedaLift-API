@@ -23,5 +23,12 @@ namespace NeedALiftAPI.Models
         public string Cost { get; set; }
         public string Comment { get; set; }
 
+        public List<Requests> Requests { get; set; }
+
+    }
+
+    public class Requests
+    {
+        public string UserId { get; set; }
     }
 }

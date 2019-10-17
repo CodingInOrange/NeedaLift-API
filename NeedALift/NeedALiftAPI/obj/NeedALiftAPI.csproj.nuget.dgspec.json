@@ -43,6 +43,10 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
+            "Abp": {
+              "target": "Package",
+              "version": "[4.9.0, )"
+            },
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -56,7 +60,7 @@
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.1.2, )"
+              "version": "[2.2.0, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -65,7 +69,7 @@
             },
             "MongoDB.Driver": {
               "target": "Package",
-              "version": "[2.8.1, )"
+              "version": "[2.9.2, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
