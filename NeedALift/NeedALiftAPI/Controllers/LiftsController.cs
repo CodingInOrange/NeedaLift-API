@@ -161,12 +161,19 @@ namespace NeedALiftAPI.Controllers
             return NoContent();
         }
 
-        [HttpPut(template:"{user}/{lift}"), Route("RequestLift")]
-        public IActionResult RequestLift(Users user, RequestLift lift)
+        [HttpPost,Route("RequestLift")]
+        public IActionResult RequestLift(LiftConfirmation lift)
         {
-            _liftservice.LiftRequests(user, lift);
+            if (_liftservice.Request(lift) == null)
+            {
+                return BadRequest("Lift does not exist!");
+            }
+            else
+            {
+                return Ok("Lift request sent!");
+            }
 
-            return Ok("Lift request sent!");
+           
         }
     }
 }

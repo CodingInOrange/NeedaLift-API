@@ -49,16 +49,22 @@ namespace NeedALiftAPI.Services
 
         public RequestLift Create(RequestLift request)
         {
-            LiftConfirmation confirmation = new LiftConfirmation
-            {
-                Id = request.Id,
-                UserIdCreated = request.userId
-            };
-
             _lifts.InsertOne(request);
-            _requests.InsertOne(confirmation);
             return request;
         }
+
+        public LiftConfirmation Request(LiftConfirmation request)
+        {
+            var lift = _lifts.Find(request.Id);
+            if (lift == null)
+            {
+                return null;
+            }
+
+            _requests.InsertOne(request);
+            return request;
+        }
+
 
 
         public void Update(RequestLift liftIn) =>
@@ -81,28 +87,6 @@ namespace NeedALiftAPI.Services
             {
                 throw e;
             }
-        }
-
-        public void LiftRequests(Users user, RequestLift lift)
-        {
-           
-            try
-            {
-                var request = _requests.Find(x => x.Id == lift.Id);
-                var usr = _users.Find(y => y.UserId == user.UserId);
-
-                //var req = new LiftConfirmation(
-                //    Id = lift.Id,)
-               // _requests.ReplaceOne(lift.Id, lift);
-
-
-            }
-            catch(Exception e)
-            {
-                throw new Exception("User or lift does not exist");
-            }
-
-            
         }
     }
 }

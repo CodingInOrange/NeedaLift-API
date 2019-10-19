@@ -22,13 +22,9 @@ namespace NeedALiftAPI.Models
         public int People { get; set; }
         public string Cost { get; set; }
         public string Comment { get; set; }
-
-        public List<Requests> Requests { get; set; }
-
-    }
-
-    public class Requests
-    {
-        public string UserId { get; set; }
+        public string FromLatitude { get; set; }
+        public string FromLongitude { get; set; }
+        public string ToLatitude { get; set; }
+        public string ToLongitude { get; set; }
     }
 }

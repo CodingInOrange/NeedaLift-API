@@ -12,12 +12,10 @@ namespace NeedALiftAPI.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string UserIdCreated { get; set; }
         public string UserIdRequested { get; set; }
-       // public List<>
-        //liftid
-        //acceptedid
-
+        public string FName { get; set; }
+        public string LName { get; set; }
+        public string Accepted { get; set; }
     }
 
     
