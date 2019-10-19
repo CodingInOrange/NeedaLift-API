@@ -96,13 +96,18 @@ namespace NeedALiftAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut,Route("UpdateUser")]
         public IActionResult UpdateUser(UsersDTO userdto)
         {
             var user = _mapper.Map<Users>(userdto);
             try
             {
                 var exist = _userService.Get(userdto.UserId.ToString());
+
+                if (_userService.Authenticate(userdto.UserId, userdto.OldPassword) == null)
+                {
+                    return BadRequest(new { message = "Old password is incorrect" });
+                }
                 _userService.Update(user, userdto.Password);
             }
             catch
@@ -110,7 +115,7 @@ namespace NeedALiftAPI.Controllers
                 return BadRequest(new { message = "User does not exist" });
             }
 
-            return Authenticate(userdto);
+            return Ok(new { message = "Password updated successfully! Please log in with your new credentials"});
         }
 
         [HttpPost("authenticate"),Route("Authentication")]
