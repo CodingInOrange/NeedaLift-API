@@ -96,6 +96,23 @@ namespace NeedALiftAPI.Controllers
             }
         }
 
+        [HttpPut]
+        public IActionResult UpdateUser(UsersDTO userdto)
+        {
+            var user = _mapper.Map<Users>(userdto);
+            try
+            {
+                var exist = _userService.Get(userdto.UserId.ToString());
+                _userService.Update(user, userdto.Password);
+            }
+            catch
+            {
+                return BadRequest(new { message = "User does not exist" });
+            }
+
+            return Authenticate(userdto);
+        }
+
         [HttpPost("authenticate"),Route("Authentication")]
         public IActionResult Authenticate([FromBody]UsersDTO userDto)
         {
