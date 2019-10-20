@@ -36,12 +36,12 @@ namespace NeedALiftAPI.Controllers
         public ActionResult<List<RequestLift>> Get() =>
             _liftservice.Get();
 
-        [Authorize]
+        //[Authorize]
         [HttpGet,Route("Users")]
         public ActionResult<List<Users>> GetUser() =>
            _userService.Get();
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("{id:length(24)}",Name = "GetLift")]
         public ActionResult<RequestLift> Get(string id)
         {
@@ -72,7 +72,7 @@ namespace NeedALiftAPI.Controllers
             return await notification ?? new List<LiftConfirmation>();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("{userId}"),Route("UserLifts")]
         public async Task<IEnumerable<RequestLift>> UserLifts(RequestLift uId)
         {
@@ -80,7 +80,7 @@ namespace NeedALiftAPI.Controllers
             return await userlifts ?? new List<RequestLift>();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public ActionResult<RequestLift> Create([FromBody]RequestLift lift)
         {
@@ -89,7 +89,7 @@ namespace NeedALiftAPI.Controllers
             return CreatedAtRoute("GetLift", new { id = lift.Id.ToString() }, lift);
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost("Register"),Route("Register")]
         public IActionResult Create([FromBody]UsersDTO userdto)
         {
@@ -111,7 +111,7 @@ namespace NeedALiftAPI.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut,Route("UpdateUser")]
         public IActionResult UpdateUser(UsersDTO userdto)
         {
@@ -133,7 +133,7 @@ namespace NeedALiftAPI.Controllers
 
             return Ok(new { message = "Password updated successfully! Please log in with your new credentials"});
         }
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost("authenticate"),Route("Authentication")]
         public IActionResult Authenticate([FromBody]UsersDTO userDto)
         {
@@ -169,7 +169,7 @@ namespace NeedALiftAPI.Controllers
         }); 
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("{id:length(24)}"),Route("UpdateLift")]
         public IActionResult Update(RequestLift liftIn)
         {
@@ -185,7 +185,7 @@ namespace NeedALiftAPI.Controllers
             return Ok(new { message = "Lift updated succesfully!" });
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete,Route("DeleteLift")]
         public IActionResult Delete(RequestLift id)
         {
