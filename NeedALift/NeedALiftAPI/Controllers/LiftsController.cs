@@ -207,11 +207,11 @@ namespace NeedALiftAPI.Controllers
         {
             if (_liftservice.Request(lift) == null)
             {
-                return BadRequest("Lift does not exist!");
+                return BadRequest(new { message = "Lift does not exist!" });
             }
             else
             {
-                return Ok("Lift request sent!");
+                return Ok(new { message = "Lift request sent!" });
             }
 
            
