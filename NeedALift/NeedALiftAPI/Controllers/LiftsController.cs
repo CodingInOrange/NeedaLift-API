@@ -11,6 +11,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NeedALiftAPI.Controllers
 {
@@ -35,10 +36,12 @@ namespace NeedALiftAPI.Controllers
         public ActionResult<List<RequestLift>> Get() =>
             _liftservice.Get();
 
+        [Authorize]
         [HttpGet,Route("Users")]
         public ActionResult<List<Users>> GetUser() =>
            _userService.Get();
 
+        [Authorize]
         [HttpGet("{id:length(24)}",Name = "GetLift")]
         public ActionResult<RequestLift> Get(string id)
         {
@@ -51,7 +54,7 @@ namespace NeedALiftAPI.Controllers
 
             return lift;
         }
-
+        [AllowAnonymous]
         [HttpGet(template: "{from}/{to}")]
         public async Task<IEnumerable<RequestLift>> Get(string from, string to)
         {
@@ -60,6 +63,16 @@ namespace NeedALiftAPI.Controllers
             return await lift ?? new List<RequestLift>();
         }
 
+        //[Authorize]
+        [HttpGet,Route("Notification")]
+        public async Task<IEnumerable<LiftConfirmation>> Notification(UsersDTO id)
+        {
+            var notification = _liftservice.Notification(id.UserId);
+
+            return await notification ?? new List<LiftConfirmation>();
+        }
+
+        [Authorize]
         [HttpGet("{userId}"),Route("UserLifts")]
         public async Task<IEnumerable<RequestLift>> UserLifts(RequestLift uId)
         {
@@ -67,6 +80,7 @@ namespace NeedALiftAPI.Controllers
             return await userlifts ?? new List<RequestLift>();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult<RequestLift> Create([FromBody]RequestLift lift)
         {
@@ -75,6 +89,7 @@ namespace NeedALiftAPI.Controllers
             return CreatedAtRoute("GetLift", new { id = lift.Id.ToString() }, lift);
         }
 
+        [AllowAnonymous]
         [HttpPost("Register"),Route("Register")]
         public IActionResult Create([FromBody]UsersDTO userdto)
         {
@@ -96,6 +111,7 @@ namespace NeedALiftAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut,Route("UpdateUser")]
         public IActionResult UpdateUser(UsersDTO userdto)
         {
@@ -117,7 +133,7 @@ namespace NeedALiftAPI.Controllers
 
             return Ok(new { message = "Password updated successfully! Please log in with your new credentials"});
         }
-
+        [AllowAnonymous]
         [HttpPost("authenticate"),Route("Authentication")]
         public IActionResult Authenticate([FromBody]UsersDTO userDto)
         {
@@ -153,6 +169,7 @@ namespace NeedALiftAPI.Controllers
         }); 
         }
 
+        [Authorize]
         [HttpPut("{id:length(24)}"),Route("UpdateLift")]
         public IActionResult Update(RequestLift liftIn)
         {
@@ -168,6 +185,7 @@ namespace NeedALiftAPI.Controllers
             return Ok(new { message = "Lift updated succesfully!" });
         }
 
+        [Authorize]
         [HttpDelete,Route("DeleteLift")]
         public IActionResult Delete(RequestLift id)
         {
@@ -183,6 +201,7 @@ namespace NeedALiftAPI.Controllers
             return NoContent();
         }
 
+       // [Authorize]
         [HttpPost,Route("RequestLift")]
         public IActionResult RequestLift(LiftConfirmation lift)
         {

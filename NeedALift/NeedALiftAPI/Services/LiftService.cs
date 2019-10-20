@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using Abp.Notifications;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using NeedALiftAPI.Models;
@@ -14,9 +13,6 @@ namespace NeedALiftAPI.Services
         private readonly IMongoCollection<RequestLift> _lifts;
         private readonly IMongoCollection<LiftConfirmation> _requests;
         private readonly IMongoCollection<Users> _users;
-       // private readonly INotificationSubscriptionManager;
-
-
 
         public LiftService(INeedALiftDBSettings settings)
         {
@@ -90,5 +86,25 @@ namespace NeedALiftAPI.Services
                 throw e;
             }
         }
+
+        public async Task<IEnumerable<LiftConfirmation>> Notification(string id)
+        {
+            try
+            {
+                var notify = _requests.Find(x => x.UserIdCreated == id && x.Seen == null);
+                return await notify.ToListAsync();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
+
+
+            
+
+        }
+
+
     }
 }

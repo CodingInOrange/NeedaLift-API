@@ -30,7 +30,6 @@ namespace NeedALiftAPI.Models
         public string UserId { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
-        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string OldPassword { get; set; }
