@@ -64,8 +64,8 @@ namespace NeedALiftAPI.Controllers
         }
 
         //[Authorize]
-        [HttpGet,Route("Notification")]
-        public async Task<IEnumerable<LiftConfirmation>> Notification(UsersDTO id)
+        [HttpPost,Route("Notification")]
+        public async Task<IEnumerable<LiftConfirmation>> Notification([FromBody]UsersDTO id)
         {
             var notification = _liftservice.Notification(id.UserId);
 
