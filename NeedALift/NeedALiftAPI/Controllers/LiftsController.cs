@@ -42,10 +42,10 @@ namespace NeedALiftAPI.Controllers
            _userService.Get();
 
         //[Authorize]
-        [HttpGet("{id:length(24)}"),Route("GetLift")]
-        public ActionResult<RequestLift> Get(string id)
+        [HttpGet("{id:length(24)}",Name = "GetLift"),Route("GetLift") ]
+        public ActionResult<RequestLift> Get([FromBody]RequestLift id)
         {
-            var lift = _liftservice.Get(id);
+            var lift = _liftservice.Get(id.Id);
 
             if(lift == null)
             {

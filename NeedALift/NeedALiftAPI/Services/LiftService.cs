@@ -104,11 +104,17 @@ namespace NeedALiftAPI.Services
                 throw e;
             }
 
-
-
-            
-
         }
+
+        //public Users RatingNotification(LiftConfirmation liftConf)
+        //{
+        //    RequestLift lift = _lifts.Find(x => x.Id == liftConf.LiftId).FirstOrDefault();
+        //    if (Convert.ToDateTime(lift.Date) < DateTime.Now)
+        //    {
+
+        //    }
+            
+        //}
 
 
     }
