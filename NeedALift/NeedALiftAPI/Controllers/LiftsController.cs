@@ -207,7 +207,7 @@ namespace NeedALiftAPI.Controllers
         {
             if (_liftservice.Request(lift) == null)
             {
-                return BadRequest(new { message = "Lift does not exist!" });
+                return BadRequest(new { message = "You have already requested this lift, or the lift does not exist anymore" });
             }
             else
             {
