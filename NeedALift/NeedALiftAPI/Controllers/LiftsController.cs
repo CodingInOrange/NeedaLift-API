@@ -207,7 +207,7 @@ namespace NeedALiftAPI.Controllers
         {
             if (_liftservice.Request(lift) == null)
             {
-                return BadRequest(new { message = "You have already requested this lift" });
+                return Ok(new { message = "You have already requested this lift, you may also not request your own lift" });
             }
             else
             {

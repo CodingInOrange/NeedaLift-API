@@ -57,9 +57,8 @@ namespace NeedALiftAPI.Services
            //     return null;
            // }
             
-            if(_requests.Find(x => x.UserIdRequested == request.UserIdRequested && x.LiftId == request.LiftId).FirstOrDefault()  == null)
+            if(_requests.Find(x => x.UserIdRequested == request.UserIdRequested && x.LiftId == request.LiftId && x.UserIdCreated != x.UserIdRequested).FirstOrDefault()  == null)
             {
-                request.Requested = "Yes";
                 _requests.InsertOne(request);
                 return request;
             }
