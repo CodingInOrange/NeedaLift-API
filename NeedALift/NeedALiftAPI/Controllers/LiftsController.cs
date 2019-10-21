@@ -42,7 +42,7 @@ namespace NeedALiftAPI.Controllers
            _userService.Get();
 
         //[Authorize]
-        [HttpGet("{id:length(24)}",Name = "GetLift")]
+        [HttpGet("{id:length(24)}"),Route("GetLift")]
         public ActionResult<RequestLift> Get(string id)
         {
             var lift = _liftservice.Get(id);
@@ -207,7 +207,7 @@ namespace NeedALiftAPI.Controllers
         {
             if (_liftservice.Request(lift) == null)
             {
-                return BadRequest(new { message = "You have already requested this lift, or the lift does not exist anymore" });
+                return BadRequest(new { message = "You have already requested this lift" });
             }
             else
             {
