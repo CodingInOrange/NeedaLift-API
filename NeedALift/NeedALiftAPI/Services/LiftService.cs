@@ -51,15 +51,20 @@ namespace NeedALiftAPI.Services
 
         public LiftConfirmation Request(LiftConfirmation request)
         {
-            var lift = _lifts.Find(x => x.Id == request.LiftId).FirstOrDefault();
+            var lift = Get(request.LiftId);
             if (lift == null)
             {
                 return null;
             }
-            else
+            
+            if(_requests.Find(x => x.UserIdRequested == request.UserIdRequested && x.Requested == null).FirstOrDefault()  == null)
             {
                 _requests.InsertOne(request);
                 return request;
+            }
+            else
+            {
+                return null;
             }
         }
 
