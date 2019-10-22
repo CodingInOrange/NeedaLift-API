@@ -59,7 +59,7 @@ namespace NeedALiftAPI.Services
            // {
            //     return null;
            // }
-            if(request.UserIdRequested != request.UserIdCreated)
+            if(request.UserIdRequested == request.UserIdCreated)
             {
                 return null;
             }
