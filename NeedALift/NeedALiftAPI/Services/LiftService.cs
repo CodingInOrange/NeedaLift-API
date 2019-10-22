@@ -29,6 +29,9 @@ namespace NeedALiftAPI.Services
         public RequestLift Get(string id) =>
             _lifts.Find(lift => lift.Id == id).FirstOrDefault();
 
+        public LiftConfirmation Get(LiftConfirmation liftIn) =>
+            _requests.Find(lift => lift.Id == liftIn.Id).FirstOrDefault();
+
         public async Task<IEnumerable<RequestLift>> GetUserLifts(string id)
         {
             try
@@ -73,6 +76,9 @@ namespace NeedALiftAPI.Services
         public void Update(RequestLift liftIn) =>
             _lifts.ReplaceOne(lift => lift.Id == liftIn.Id,liftIn);
 
+        public void Update(LiftConfirmation confirmation) =>
+            _requests.ReplaceOne(lift => lift.Id == confirmation.Id,confirmation);
+
         public void Remove(RequestLift liftIn) =>
             _lifts.DeleteOne(lift => lift.Id == liftIn.Id);
 
@@ -96,7 +102,7 @@ namespace NeedALiftAPI.Services
         {
             try
             {
-                var notify = _requests.Find(x => x.UserIdCreated == id && x.Accepted == null);
+                var notify = _requests.Find(x => x.UserIdCreated == id);
                 return await notify.ToListAsync();
             }
             catch(Exception e)
@@ -106,14 +112,28 @@ namespace NeedALiftAPI.Services
 
         }
 
+
+        //public async Task<IEnumerable<LiftConfirmation>> AcceptedLift(LiftConfirmation confirmation)
+        //{
+        //    try
+        //    {
+        //        var lift = _requests.Find(x => x.Id == confirmation.Id).FirstOrDefault();
+        //        if(lift == null)
+        //        {
+        //            return null;
+        //        }
+
+                
+        //    }
+        //}
+
         //public async Task<IEnumerable<LiftConfirmation>> RatingNotification(LiftConfirmation liftConf)
         //{
         //    var user = _requests.Find(x => x.UserIdCreated == liftConf.UserIdCreated).FirstOrDefault();
 
-        //    if (Convert.ToDateTime(liftConf.Date) > DateTime.Now)
+        //    if (Convert.ToDateTime(liftConf.Date) < DateTime.Now)
         //    {
-        //        var rnotify = _
-        //        return await 
+        //        return null;
         //    }
 
 

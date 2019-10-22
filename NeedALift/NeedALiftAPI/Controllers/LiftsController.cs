@@ -185,6 +185,20 @@ namespace NeedALiftAPI.Controllers
             return Ok(new { message = "Lift updated succesfully!" });
         }
 
+        [HttpPut,Route("ConfirmLiftRequest")]
+        public IActionResult Update(LiftConfirmation liftIn)
+        {
+            var lift = _liftservice.Get(liftIn);
+
+            //if(lift == null)
+            //{
+            //    return NotFound();
+            //}
+
+            _liftservice.Update(liftIn);
+
+            return Ok(new { message = "You have accepted the lift request!" });
+        }
         //[Authorize]
         [HttpDelete,Route("DeleteLift")]
         public IActionResult Delete(RequestLift id)

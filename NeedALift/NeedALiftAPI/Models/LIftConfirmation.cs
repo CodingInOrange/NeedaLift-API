@@ -15,7 +15,6 @@ namespace NeedALiftAPI.Models
         public string LiftId { get; set; }
         public string UserIdRequested { get; set; }
         public string UserIdCreated { get; set; }
-        public string Date { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
         public string Accepted { get; set; }
