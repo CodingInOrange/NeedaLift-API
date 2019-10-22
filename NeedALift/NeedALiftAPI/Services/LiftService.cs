@@ -96,7 +96,7 @@ namespace NeedALiftAPI.Services
         {
             try
             {
-                var notify = _requests.Find(x => x.UserIdCreated == id && x.Seen == null);
+                var notify = _requests.Find(x => x.UserIdCreated == id && x.Accepted == null);
                 return await notify.ToListAsync();
             }
             catch(Exception e)
@@ -106,14 +106,18 @@ namespace NeedALiftAPI.Services
 
         }
 
-        //public Users RatingNotification(LiftConfirmation liftConf)
+        //public async Task<IEnumerable<LiftConfirmation>> RatingNotification(LiftConfirmation liftConf)
         //{
-        //    RequestLift lift = _lifts.Find(x => x.Id == liftConf.LiftId).FirstOrDefault();
-        //    if (Convert.ToDateTime(lift.Date) < DateTime.Now)
-        //    {
+        //    var user = _requests.Find(x => x.UserIdCreated == liftConf.UserIdCreated).FirstOrDefault();
 
+        //    if (Convert.ToDateTime(liftConf.Date) > DateTime.Now)
+        //    {
+        //        var rnotify = _
+        //        return await 
         //    }
-            
+
+
+
         //}
 
 
