@@ -84,9 +84,9 @@ namespace NeedALiftAPI.Controllers
             //return await notification ?? new List<LiftConfirmation>();
         }
 
-        [HttpGet]
+       // [HttpGet]
         //[Authorize]
-        [HttpGet("{userId}"),Route("UserLifts")]
+        [HttpPost("{userId}"),Route("UserLifts")]
         public async Task<IEnumerable<RequestLift>> UserLifts(RequestLift uId)
         {
             var userlifts = _liftservice.GetUserLifts(uId.userId);
