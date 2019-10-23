@@ -19,6 +19,7 @@ namespace NeedALiftAPI.Models
         public string FName { get; set; }
         public string LName { get; set; }
         public string Rating { get; set; }
+        public string PhoneNum { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
     }
@@ -33,5 +34,7 @@ namespace NeedALiftAPI.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string OldPassword { get; set; }
+        public string PhoneNum { get; set; }
+        public string Rating { get; set; }
     }
 }

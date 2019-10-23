@@ -16,6 +16,7 @@ namespace NeedALiftAPI.Models
         public string userId { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
+        public string PhoneNum { get; set; }
         public string From { get; set; }
         public string To { get; set; }
 

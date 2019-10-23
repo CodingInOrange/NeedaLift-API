@@ -84,7 +84,21 @@ namespace NeedALiftAPI.Controllers
             //return await notification ?? new List<LiftConfirmation>();
         }
 
-       // [HttpGet]
+        [HttpPost,Route("Ratings")]
+        public IActionResult Rating(LiftConfirmation lift)
+        {
+            var user1 = _userService.Get(lift.UserIdRequested);
+            var user2 = _userService.Get(lift.UserIdRequested);
+
+            //if(user1 == null && user2 == null)
+            //{
+            //    return Ok(new { message = "The user does not exist!" });
+            //}
+
+            _liftservice.UpdateRating(lift);
+
+            return Ok(new { message = "Thank you for rating the user!" });
+        }
         //[Authorize]
         [HttpPost("{userId}"),Route("UserLifts")]
         public async Task<IEnumerable<RequestLift>> UserLifts(RequestLift uId)
@@ -144,8 +158,9 @@ namespace NeedALiftAPI.Controllers
                 return BadRequest(new { message = "User does not exist" });
             }
 
-            return Ok(new { message = "Password updated successfully! Please log in with your new credentials"});
+            return Ok(new { message = "Updated"});
         }
+
         //[AllowAnonymous]
         [HttpPost("authenticate"),Route("Authentication")]
         public IActionResult Authenticate([FromBody]UsersDTO userDto)
