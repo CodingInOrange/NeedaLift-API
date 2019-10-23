@@ -88,6 +88,10 @@ namespace NeedALiftAPI.Services
             }
         }
 
+        //public RequestLift Rating(RequestLift lift)
+        //{
+
+        //}
 
 
         public void Update(RequestLift liftIn) =>

@@ -28,5 +28,6 @@ namespace NeedALiftAPI.Models
         public string FromLongitude { get; set; }
         public string ToLatitude { get; set; }
         public string ToLongitude { get; set; }
+        public string Rating { get; set; }
     }
 }
