@@ -42,7 +42,7 @@ namespace NeedALiftAPI.Controllers
            _userService.Get();
 
         //[Authorize]
-        [HttpGet("{id:length(24)}",Name = "GetLift"),Route("GetLift") ]
+        [HttpPost("{id:length(24)}",Name = "GetLift"),Route("GetLift") ]
         public ActionResult<RequestLift> Get([FromBody]RequestLift id)
         {
             var lift = _liftservice.Get(id.Id);
@@ -72,6 +72,19 @@ namespace NeedALiftAPI.Controllers
             return await notification ?? new List<LiftConfirmation>();
         }
 
+        //[Authorize]
+        [HttpPost, Route("AcceptedLifts")]
+        public IEnumerable<RequestLift> Notification1([FromBody]UsersDTO id)
+        {
+            var notification = _liftservice.GetAcceptedLifts(id.UserId);
+            var noti = notification.Result.ToList();
+
+
+            return _liftservice.Get(noti);
+            //return await notification ?? new List<LiftConfirmation>();
+        }
+
+        [HttpGet]
         //[Authorize]
         [HttpGet("{userId}"),Route("UserLifts")]
         public async Task<IEnumerable<RequestLift>> UserLifts(RequestLift uId)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using NeedALiftAPI.Models;
     
 namespace NeedALiftAPI.Services
@@ -28,6 +29,19 @@ namespace NeedALiftAPI.Services
 
         public RequestLift Get(string id) =>
             _lifts.Find(lift => lift.Id == id).FirstOrDefault();
+
+        public List<RequestLift> Get(List<LiftConfirmation> confirmation)
+        {
+            List<RequestLift> requestLifts = new List<RequestLift>();
+
+            foreach(var lift in confirmation)
+            {
+                requestLifts.Add(Get(lift.LiftId));
+            }
+
+            return requestLifts;
+        }
+
 
         public LiftConfirmation Get(LiftConfirmation liftIn) =>
             _requests.Find(lift => lift.Id == liftIn.Id).FirstOrDefault();
@@ -115,20 +129,21 @@ namespace NeedALiftAPI.Services
 
         }
 
+        public async Task<IEnumerable<LiftConfirmation>> GetAcceptedLifts(string id)
+        {
+            try
+            {
+                var notify =  _requests.Find(x => x.UserIdRequested == id && x.Accepted == "Yes");
 
-        //public async Task<IEnumerable<LiftConfirmation>> AcceptedLift(LiftConfirmation confirmation)
-        //{
-        //    try
-        //    {
-        //        var lift = _requests.Find(x => x.Id == confirmation.Id).FirstOrDefault();
-        //        if(lift == null)
-        //        {
-        //            return null;
-        //        }
-
+                return await notify.ToListAsync();
                 
-        //    }
-        //}
+
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
 
         //public async Task<IEnumerable<LiftConfirmation>> RatingNotification(LiftConfirmation liftConf)
         //{
