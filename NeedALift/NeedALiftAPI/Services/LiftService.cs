@@ -167,24 +167,26 @@ namespace NeedALiftAPI.Services
             {
                 var notify = await _requests.Find(x => x.UserIdCreated == id || x.UserIdRequested == id).ToListAsync();
 
-                    //notify = await _requests.Find(x => x.UserIdRequested == id).ToListAsync();
 
                     foreach (var item in notify)
                     {
+
                         if (item.Date != null && Convert.ToDateTime(item.Date) < DateTime.UtcNow)
                         {
-                            if(item.UserIdRequested == id)
+                            if(item.UserIdRequested == id && item.RequestedRating != "Yes")
                             {
                                 var user = _users.Find(x => x.UserId == item.UserIdCreated).FirstOrDefault();
                                 item.FName = user.FName;
                                 item.LName = user.LName;
                                 item.UserIdRequested = null;
-                            }
-                            else if(item.UserIdCreated == id)
+                                lift.Add(item);
+                        }
+                            else if(item.UserIdCreated == id  && item.CreatedRating != "Yes")
                             {
                                 item.UserIdCreated = null;
-                            }
-                            lift.Add(item);
+                                lift.Add(item);
+                        }
+                            
                         }
                     }
                 return lift;
@@ -227,7 +229,6 @@ namespace NeedALiftAPI.Services
                     var filter1 = Builders<LiftConfirmation>.Filter.Eq("Id", lift.Id);
                     var update1 = Builders<LiftConfirmation>.Update.Set("RequestedRating", "Yes");
                     _requests.UpdateOne(filter1, update1);
-                    // _lifts.DeleteOne(lift.LiftId);
                 }
                 else if (lift.CreatedRating != null)
                 {
@@ -239,7 +240,6 @@ namespace NeedALiftAPI.Services
 
                     if (rating == null)
                     {
-                        // user.Rating = Convert.ToString(lift.RequestedRating);
                         rating = Convert.ToString(lift.CreatedRating);
                     }
                     else
@@ -256,11 +256,6 @@ namespace NeedALiftAPI.Services
                     var update1 = Builders<LiftConfirmation>.Update.Set("CreatedRating", "Yes");
                     _requests.UpdateOne(filter1, update1);
                 }
-
-
-
-
-                // _lifts.DeleteOne(lift.LiftId);
             }
            else
             {
@@ -285,18 +280,6 @@ namespace NeedALiftAPI.Services
             }
         }
 
-        //public async Task<IEnumerable<LiftConfirmation>> RatingNotification(LiftConfirmation liftConf)
-        //{
-        //    var user = _requests.Find(x => x.UserIdCreated == liftConf.UserIdCreated).FirstOrDefault();
-
-        //    if (Convert.ToDateTime(liftConf.Date) < DateTime.Now)
-        //    {
-        //        return null;
-        //    }
-
-
-
-        //}
 
 
     }
