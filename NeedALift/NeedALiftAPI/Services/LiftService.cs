@@ -165,7 +165,7 @@ namespace NeedALiftAPI.Services
 
             try
             {
-                var notify = await _requests.Find(x => x.UserIdCreated == id || x.UserIdRequested == id).ToListAsync();
+                var notify = await _requests.Find(x => x.UserIdCreated == id && x.Accepted == "Yes" || x.UserIdRequested == id && x.Accepted == "Yes").ToListAsync();
 
 
                     foreach (var item in notify)
