@@ -165,13 +165,13 @@ namespace NeedALiftAPI.Services
 
             try
             {
-                var notify = await _requests.Find(x => x.UserIdCreated == id && x.Accepted == "Yes" || x.UserIdRequested == id && x.Accepted == "Yes").ToListAsync();
+                var notify = await _requests.Find(x => x.UserIdCreated == id || x.UserIdRequested == id ).ToListAsync();
 
 
                     foreach (var item in notify)
                     {
 
-                        if (item.Date != null && Convert.ToDateTime(item.Date) < DateTime.UtcNow)
+                        if ((item.Date != null && Convert.ToDateTime(item.Date) < DateTime.UtcNow ) && item.Accepted == "Yes")
                         {
                             if(item.UserIdRequested == id && item.CreatedRating != "Yes")
                             {
@@ -181,11 +181,11 @@ namespace NeedALiftAPI.Services
                                 item.UserIdRequested = null;
                                 lift.Add(item);
                         }
-                            else if(item.UserIdCreated == id  && item.RequestedRating != "Yes")
+                            else if(item.UserIdCreated == id  && item.RequestedRating != "Yes" )
                             {
                                 item.UserIdCreated = null;
                                 lift.Add(item);
-                        }
+                            }
                             
                         }
                     }
