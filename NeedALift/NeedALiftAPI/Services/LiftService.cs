@@ -134,6 +134,33 @@ namespace NeedALiftAPI.Services
 
         }
 
+        public async Task<IEnumerable<LiftConfirmation>> LiftsToRate(string id)
+        {
+            var date = Convert.ToDateTime("Fri, Aug 30 2019");
+            var lift = new List<LiftConfirmation>();
+
+            try
+            {
+                var notify = await _requests.Find(x => x.UserIdCreated == id || x.UserIdRequested == id).ToListAsync();
+
+                    //notify = await _requests.Find(x => x.UserIdRequested == id).ToListAsync();
+
+                    foreach (var item in notify)
+                    {
+                        if (item.Date != null && Convert.ToDateTime(item.Date) < DateTime.UtcNow)
+                        {
+                            lift.Add(item);
+                        }
+                    }
+                return lift;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
         //public IEnumerable<LiftConfirmation> RateLifts(string id)
         //{
         //    try
@@ -144,7 +171,7 @@ namespace NeedALiftAPI.Services
         //        {
         //            var lift =
         //        }
-                
+
         //        return await notify;
         //    }
         //    catch (Exception e)
