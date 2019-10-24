@@ -87,6 +87,7 @@ namespace NeedALiftAPI.Services
                     throw new Exception("Username \"" + user.UserId + "\" already exists");
             }
 
+            if(userParam.FName != null && userParam.LName != null && userParam.UserId != null)
             // update user properties
             user.FName = userParam.FName;
             user.LName = userParam.LName;
