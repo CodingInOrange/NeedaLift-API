@@ -22,6 +22,7 @@ namespace NeedALiftAPI.Services
 
             _lifts = database.GetCollection<RequestLift>(settings.CollectionName1);
             _requests = database.GetCollection<LiftConfirmation>(settings.CollectionName2);
+            _users = database.GetCollection<Users>(settings.CollectionName3);
         }
 
         public List<RequestLift> Get() =>
@@ -123,8 +124,8 @@ namespace NeedALiftAPI.Services
         {
             try
             {
-                var notify = _requests.Find(x => x.UserIdCreated == id);
-                return await notify.ToListAsync();
+                var notify = _requests.Find(x => x.UserIdCreated == id).ToListAsync();
+                return await notify;
             }
             catch(Exception e)
             {
@@ -133,11 +134,32 @@ namespace NeedALiftAPI.Services
 
         }
 
+        //public IEnumerable<LiftConfirmation> RateLifts(string id)
+        //{
+        //    try
+        //    {
+        //        var notify = _requests.Find(x => x.UserIdCreated == id).ToListAsync();
+
+        //        foreach(var item in notify)
+        //        {
+        //            var lift =
+        //        }
+                
+        //        return await notify;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+
+        //}
+
+
         public void UpdateRating(LiftConfirmation lift)
         {
-           if(lift.UserIdCreated != null)
+           if(lift.RequestedRating != null)
             {
-                var user = _users.Find(x => x.UserId == lift.UserIdRequested).FirstOrDefault();
+                var user = _users.Find(x => x.UserId == lift.UserIdCreated).FirstOrDefault();
                 var rating = user.Rating;
 
                 if (user == null)
@@ -154,23 +176,37 @@ namespace NeedALiftAPI.Services
                 }
                     
 
-                var filter = Builders<Users>.Filter.Eq("userId", lift.UserIdRequested);
-                var update = Builders<Users>.Update.Set("userId", lift.UserIdRequested);
-                update = update.Set("Rating", rating);
+                var filter = Builders<Users>.Filter.Eq("UserId", lift.UserIdCreated);
+                var update = Builders<Users>.Update.Set("Rating", rating);
                 _users.UpdateOne(filter, update);
                // _lifts.DeleteOne(lift.LiftId);
             }
-            //else if(lift.UserIdRequested != null)
-            //{
-            //    var user = _users.Find(x => x.UserId == lift.UserIdCreated).FirstOrDefault();
+            else if (lift.CreatedRating != null)
+            {
+                var user = _users.Find(x => x.UserId == lift.UserIdRequested).FirstOrDefault();
+                var rating = user.Rating;
 
-            //    if (user == null)
-            //        throw new Exception("User not found");
+                if (user == null)
+                    throw new Exception("User not found");
 
-            //    user.Rating = (user.Rating + lift.RequestedRating) / 2;
-            //}
+                if (rating == null)
+                {
+                    // user.Rating = Convert.ToString(lift.RequestedRating);
+                    rating = Convert.ToString(lift.CreatedRating);
+                }
+                else
+                {
+                    rating = Convert.ToString((Convert.ToDouble(user.Rating) + Convert.ToDouble(lift.CreatedRating)) / 2);
+                }
 
-            
+
+                var filter = Builders<Users>.Filter.Eq("UserId", lift.UserIdRequested);
+                var update = Builders<Users>.Update.Set("Rating", rating);
+                _users.UpdateOne(filter, update);
+                // _lifts.DeleteOne(lift.LiftId);
+            }
+
+
 
         }
         public async Task<IEnumerable<LiftConfirmation>> GetAcceptedLifts(string id)

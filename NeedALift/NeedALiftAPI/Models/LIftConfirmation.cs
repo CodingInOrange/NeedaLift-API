@@ -13,14 +13,15 @@ namespace NeedALiftAPI.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string LiftId { get; set; }
+        public string Date { get; set; }
         public string UserIdRequested { get; set; }
         public string UserIdCreated { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
         public string Accepted { get; set; }
         public string Requested { get; set; }
-        public double CreatedRating { get; set; }
-        public double RequestedRating { get; set; }
+        public string CreatedRating { get; set; }
+        public string RequestedRating { get; set; }
     }
 
     

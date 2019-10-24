@@ -84,6 +84,13 @@ namespace NeedALiftAPI.Controllers
             //return await notification ?? new List<LiftConfirmation>();
         }
 
+        //[HttpPost,Route("RateLifts")]
+        //public IEnumerable<LiftConfirmation> LiftToRate(UsersDTO user)
+        //{
+        //    var lift = _liftservice.Notification(user.UserId);
+        //    lift = lift.
+        //}
+
         [HttpPost,Route("Ratings")]
         public IActionResult Rating(LiftConfirmation lift)
         {
