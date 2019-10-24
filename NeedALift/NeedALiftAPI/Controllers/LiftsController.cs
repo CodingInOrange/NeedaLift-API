@@ -228,10 +228,10 @@ namespace NeedALiftAPI.Controllers
         {
             var lift = _liftservice.Get(liftIn);
 
-            //if(lift == null)
-            //{
-            //    return NotFound();
-            //}
+            if(liftIn.Requested =="Decline")
+            {
+                _liftservice.RemoveConf(liftIn.Id);
+            }
 
             _liftservice.Update(liftIn);
 
