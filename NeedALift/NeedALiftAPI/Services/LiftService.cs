@@ -71,6 +71,9 @@ namespace NeedALiftAPI.Services
 
         public RequestLift Create(RequestLift request)
         {
+            var user = _users.Find(x => x.UserId == request.userId).FirstOrDefault();
+            request.Rating = user.Rating;
+
             _lifts.InsertOne(request);
             return request;
         }
@@ -200,7 +203,7 @@ namespace NeedALiftAPI.Services
             {
                 if (lift.RequestedRating != null)
                 {
-                    var user = _users.Find(x => x.UserId == lift.UserIdCreated).FirstOrDefault();
+                    var user = _users.Find(x => x.UserId == lift.UserIdRequested).FirstOrDefault();
                     var rating = user.Rating;
 
                     if (user == null)
