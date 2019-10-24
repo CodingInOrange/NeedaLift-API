@@ -173,7 +173,7 @@ namespace NeedALiftAPI.Services
 
                         if (item.Date != null && Convert.ToDateTime(item.Date) < DateTime.UtcNow)
                         {
-                            if(item.UserIdRequested == id && item.RequestedRating != "Yes")
+                            if(item.UserIdRequested == id && item.CreatedRating != "Yes")
                             {
                                 var user = _users.Find(x => x.UserId == item.UserIdCreated).FirstOrDefault();
                                 item.FName = user.FName;
@@ -181,7 +181,7 @@ namespace NeedALiftAPI.Services
                                 item.UserIdRequested = null;
                                 lift.Add(item);
                         }
-                            else if(item.UserIdCreated == id  && item.CreatedRating != "Yes")
+                            else if(item.UserIdCreated == id  && item.RequestedRating != "Yes")
                             {
                                 item.UserIdCreated = null;
                                 lift.Add(item);
