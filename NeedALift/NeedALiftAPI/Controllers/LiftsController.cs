@@ -235,7 +235,7 @@ namespace NeedALiftAPI.Controllers
 
             _liftservice.Update(liftIn);
 
-            return Ok(new { message = "You have accepted the lift request!" });
+            return Ok(new { message = "You have accepted the lift request!" }); 
         }
         //[Authorize]
         [HttpDelete,Route("DeleteLift")]
