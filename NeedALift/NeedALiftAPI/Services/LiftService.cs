@@ -38,7 +38,15 @@ namespace NeedALiftAPI.Services
             foreach(var lift in confirmation)
             {
                 requestLifts.Add(Get(lift.LiftId));
+
+                foreach (var user in requestLifts)
+                {
+                    var userinfo = _users.Find(x => x.UserId == lift.UserIdCreated).FirstOrDefault();
+                    user.PhoneNum = user.PhoneNum;
+                }
             }
+
+         
 
             return requestLifts;
         }
