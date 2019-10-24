@@ -109,10 +109,21 @@ namespace NeedALiftAPI.Services
 
         public async Task<IEnumerable<RequestLift>> Get(string from, string to)
         {
+            var rated = new List<RequestLift>();
             try
             {
-                var query = _lifts.Find(lift => lift.From.Contains(from) && lift.To.Contains(to));
-                return await query.ToListAsync();
+                var query = await _lifts.Find(lift => lift.From.Contains(from) && lift.To.Contains(to)).ToListAsync();
+
+                foreach(var item in query)
+                {
+                    var user = _users.Find(x => x.UserId == item.userId).FirstOrDefault();
+
+                    item.Rating = user.Rating;
+
+                    rated.Add(item);
+                }
+
+                return rated;
             }
             catch(Exception e)
             {
@@ -136,7 +147,6 @@ namespace NeedALiftAPI.Services
 
         public async Task<IEnumerable<LiftConfirmation>> LiftsToRate(string id)
         {
-            var date = Convert.ToDateTime("Fri, Aug 30 2019");
             var lift = new List<LiftConfirmation>();
 
             try
@@ -149,6 +159,17 @@ namespace NeedALiftAPI.Services
                     {
                         if (item.Date != null && Convert.ToDateTime(item.Date) < DateTime.UtcNow)
                         {
+                            if(item.UserIdRequested == id)
+                            {
+                                var user = _users.Find(x => x.UserId == item.UserIdCreated).FirstOrDefault();
+                                item.FName = user.FName;
+                                item.LName = user.LName;
+                                item.UserIdRequested = null;
+                            }
+                            else if(item.UserIdCreated == id)
+                            {
+                                item.UserIdCreated = null;
+                            }
                             lift.Add(item);
                         }
                     }
@@ -160,26 +181,6 @@ namespace NeedALiftAPI.Services
             }
 
         }
-
-        //public IEnumerable<LiftConfirmation> RateLifts(string id)
-        //{
-        //    try
-        //    {
-        //        var notify = _requests.Find(x => x.UserIdCreated == id).ToListAsync();
-
-        //        foreach(var item in notify)
-        //        {
-        //            var lift =
-        //        }
-
-        //        return await notify;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-
-        //}
 
 
         public void UpdateRating(LiftConfirmation lift)
