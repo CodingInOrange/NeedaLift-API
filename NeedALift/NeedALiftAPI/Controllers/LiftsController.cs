@@ -94,13 +94,16 @@ namespace NeedALiftAPI.Controllers
         [HttpPost,Route("Ratings")]
         public IActionResult Rating(LiftConfirmation lift)
         {
-            var user1 = _userService.Get(lift.UserIdRequested);
-            var user2 = _userService.Get(lift.UserIdRequested);
+            var request = _liftservice.Get(lift);
 
-            //if(user1 == null && user2 == null)
-            //{
-            //    return Ok(new { message = "The user does not exist!" });
-            //}
+            if(request.RequestedRating == "Yes" && request.UserIdRequested == lift.UserIdRequested)
+            {
+                return Ok(new { message = "You have already rated this user" });
+            }
+            else if(request.CreatedRating == "Yes" && request.UserIdCreated == lift.UserIdCreated)
+            {
+                return Ok(new { message = "You have already rated this user" });
+            }
 
             _liftservice.UpdateRating(lift);
 

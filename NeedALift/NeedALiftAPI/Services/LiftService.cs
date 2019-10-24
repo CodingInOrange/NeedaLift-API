@@ -112,6 +112,9 @@ namespace NeedALiftAPI.Services
         public void Remove(RequestLift liftIn) =>
             _lifts.DeleteOne(lift => lift.Id == liftIn.Id);
 
+        public void RemoveConf(string liftIn) =>
+        _requests.DeleteOne(lift => lift.Id == liftIn);
+
         public void Remove(string id) =>
             _lifts.DeleteOne(lift => lift.Id == id);
 
@@ -193,56 +196,74 @@ namespace NeedALiftAPI.Services
 
         public void UpdateRating(LiftConfirmation lift)
         {
-           if(lift.RequestedRating != null)
+           if (_requests.Find(x => x.Id == lift.Id && x.RequestedRating == "Yes" && x.CreatedRating == "Yes").FirstOrDefault() == null)
             {
-                var user = _users.Find(x => x.UserId == lift.UserIdCreated).FirstOrDefault();
-                var rating = user.Rating;
-
-                if (user == null)
-                    throw new Exception("User not found");
-
-               if(rating == null)
+                if (lift.RequestedRating != null)
                 {
-                   // user.Rating = Convert.ToString(lift.RequestedRating);
-                   rating = Convert.ToString(lift.RequestedRating);
+                    var user = _users.Find(x => x.UserId == lift.UserIdCreated).FirstOrDefault();
+                    var rating = user.Rating;
+
+                    if (user == null)
+                        throw new Exception("User not found");
+
+                    if (rating == null)
+                    {
+                        // user.Rating = Convert.ToString(lift.RequestedRating);
+                        rating = Convert.ToString(lift.RequestedRating);
+                    }
+                    else
+                    {
+                        rating = Convert.ToString((Convert.ToDouble(user.Rating) + Convert.ToDouble(lift.RequestedRating)) / 2);
+                    }
+
+
+                    var filter = Builders<Users>.Filter.Eq("UserId", lift.UserIdCreated);
+                    var update = Builders<Users>.Update.Set("Rating", rating);
+                    _users.UpdateOne(filter, update);
+
+                    var filter1 = Builders<LiftConfirmation>.Filter.Eq("Id", lift.Id);
+                    var update1 = Builders<LiftConfirmation>.Update.Set("RequestedRating", "Yes");
+                    _requests.UpdateOne(filter1, update1);
+                    // _lifts.DeleteOne(lift.LiftId);
                 }
-               else
+                else if (lift.CreatedRating != null)
                 {
-                    rating = Convert.ToString((Convert.ToDouble(user.Rating) + Convert.ToDouble(lift.RequestedRating)) / 2);
+                    var user = _users.Find(x => x.UserId == lift.UserIdCreated).FirstOrDefault();
+                    var rating = user.Rating;
+
+                    if (user == null)
+                        throw new Exception("User not found");
+
+                    if (rating == null)
+                    {
+                        // user.Rating = Convert.ToString(lift.RequestedRating);
+                        rating = Convert.ToString(lift.CreatedRating);
+                    }
+                    else
+                    {
+                        rating = Convert.ToString((Convert.ToDouble(user.Rating) + Convert.ToDouble(lift.CreatedRating)) / 2);
+                    }
+
+
+                    var filter = Builders<Users>.Filter.Eq("UserId", lift.UserIdCreated);
+                    var update = Builders<Users>.Update.Set("Rating", rating);
+                    _users.UpdateOne(filter, update);
+
+                    var filter1 = Builders<LiftConfirmation>.Filter.Eq("Id", lift.Id);
+                    var update1 = Builders<LiftConfirmation>.Update.Set("CreatedRating", "Yes");
+                    _requests.UpdateOne(filter1, update1);
                 }
-                    
-
-                var filter = Builders<Users>.Filter.Eq("UserId", lift.UserIdCreated);
-                var update = Builders<Users>.Update.Set("Rating", rating);
-                _users.UpdateOne(filter, update);
-               // _lifts.DeleteOne(lift.LiftId);
-            }
-            else if (lift.CreatedRating != null)
-            {
-                var user = _users.Find(x => x.UserId == lift.UserIdRequested).FirstOrDefault();
-                var rating = user.Rating;
-
-                if (user == null)
-                    throw new Exception("User not found");
-
-                if (rating == null)
-                {
-                    // user.Rating = Convert.ToString(lift.RequestedRating);
-                    rating = Convert.ToString(lift.CreatedRating);
-                }
-                else
-                {
-                    rating = Convert.ToString((Convert.ToDouble(user.Rating) + Convert.ToDouble(lift.CreatedRating)) / 2);
-                }
 
 
-                var filter = Builders<Users>.Filter.Eq("UserId", lift.UserIdRequested);
-                var update = Builders<Users>.Update.Set("Rating", rating);
-                _users.UpdateOne(filter, update);
+
+
                 // _lifts.DeleteOne(lift.LiftId);
             }
-
-
+           else
+            {
+                RemoveConf(lift.Id);
+                Remove(lift.LiftId);
+            }
 
         }
         public async Task<IEnumerable<LiftConfirmation>> GetAcceptedLifts(string id)
