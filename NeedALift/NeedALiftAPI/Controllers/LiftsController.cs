@@ -231,6 +231,8 @@ namespace NeedALiftAPI.Controllers
             if(liftIn.Requested =="Decline")
             {
                 _liftservice.RemoveConf(liftIn.Id);
+
+                return Ok(new { message = "Declined lift request" });
             }
 
             _liftservice.Update(liftIn);

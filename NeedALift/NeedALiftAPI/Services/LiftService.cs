@@ -222,7 +222,7 @@ namespace NeedALiftAPI.Services
                     }
 
 
-                    var filter = Builders<Users>.Filter.Eq("UserId", lift.UserIdCreated);
+                    var filter = Builders<Users>.Filter.Eq("UserId", lift.UserIdRequested);
                     var update = Builders<Users>.Update.Set("Rating", rating);
                     _users.UpdateOne(filter, update);
 
