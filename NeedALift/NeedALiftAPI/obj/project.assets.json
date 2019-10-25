@@ -12613,25 +12613,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jacques Geldenhuys\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Users\\Paul\\.nuget\\packages\\": {},
+    "C:\\ProgramData\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\NeedALiftAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Paul\\Desktop\\Student\\324\\Need a Lift API\\NeedALiftAPI\\NeedaLift-API\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\NeedALiftAPI.csproj",
       "projectName": "NeedALiftAPI",
-      "projectPath": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\NeedALiftAPI.csproj",
-      "packagesPath": "C:\\Users\\Jacques Geldenhuys\\.nuget\\packages\\",
-      "outputPath": "D:\\NWU\\3de Jaar\\2de Semester\\ITRW 324\\Projek\\Backend\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\obj\\",
+      "projectPath": "C:\\Users\\Paul\\Desktop\\Student\\324\\Need a Lift API\\NeedALiftAPI\\NeedaLift-API\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\NeedALiftAPI.csproj",
+      "packagesPath": "C:\\Users\\Paul\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Paul\\Desktop\\Student\\324\\Need a Lift API\\NeedALiftAPI\\NeedaLift-API\\NeedaLift-API\\NeedALift\\NeedALiftAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\ProgramData\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Jacques Geldenhuys\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Paul\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -12672,7 +12672,6 @@
             "version": "[2.2.0, )"
           },
           "Microsoft.NETCore.App": {
-            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
@@ -12687,16 +12686,10 @@
           }
         },
         "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48"
+          "net461"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   },

@@ -28,3 +28,17 @@ D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\Nee
 D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\NeedALiftAPI\bin\Debug\netcoreapp2.1\appsettings.Development.json
 D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\NeedALiftAPI\bin\Debug\netcoreapp2.1\appsettings.json
 D:\NWU\3de Jaar\2de Semester\ITRW 324\Projek\Backend\NeedaLift-API\NeedALift\NeedALiftAPI\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\bin\Debug\netcoreapp2.1\NeedALiftAPI.deps.json
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\bin\Debug\netcoreapp2.1\NeedALiftAPI.runtimeconfig.json
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\bin\Debug\netcoreapp2.1\NeedALiftAPI.runtimeconfig.dev.json
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\bin\Debug\netcoreapp2.1\NeedALiftAPI.dll
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\bin\Debug\netcoreapp2.1\NeedALiftAPI.pdb
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.csprojAssemblyReference.cache
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.csproj.CoreCompileInputs.cache
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.RazorAssemblyInfo.cache
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.RazorAssemblyInfo.cs
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.AssemblyInfoInputs.cache
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.AssemblyInfo.cs
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.RazorTargetAssemblyInfo.cache
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.dll
+C:\Users\Paul\Desktop\Student\324\Need a Lift API\NeedALiftAPI\NeedaLift-API\NeedaLift-API\NeedALift\NeedALiftAPI\obj\Debug\netcoreapp2.1\NeedALiftAPI.pdb
