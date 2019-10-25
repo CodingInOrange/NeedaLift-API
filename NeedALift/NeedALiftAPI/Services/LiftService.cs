@@ -271,7 +271,7 @@ namespace NeedALiftAPI.Services
                     }
                     else
                     {
-                        rating = Convert.ToString((Convert.ToDouble(user.Rating) + Convert.ToDouble(lift.CreatedRating)) / 2);
+                        rating = Convert.ToString(Math.Round((Convert.ToDouble(user.Rating) + Convert.ToDouble(lift.CreatedRating)) / 2,1));
                     }
 
 

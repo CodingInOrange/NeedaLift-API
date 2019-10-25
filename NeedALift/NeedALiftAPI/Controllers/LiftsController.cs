@@ -88,6 +88,7 @@ namespace NeedALiftAPI.Controllers
         public async Task<IEnumerable<LiftConfirmation>> LiftToRate(UsersDTO user)
         {
             var lift = _liftservice.LiftsToRate(user.UserId);
+
             return await lift ?? new List<LiftConfirmation>();
         }
 
