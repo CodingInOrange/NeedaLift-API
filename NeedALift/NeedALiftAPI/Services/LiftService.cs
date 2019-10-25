@@ -42,7 +42,8 @@ namespace NeedALiftAPI.Services
                 foreach (var user in requestLifts)
                 {
                     var userinfo = _users.Find(x => x.UserId == lift.UserIdCreated || x.UserId == lift.UserIdRequested).FirstOrDefault();
-                    user.PhoneNum = user.PhoneNum;
+                    user.PhoneNum = userinfo.PhoneNum;
+                    user.Rating = userinfo.Rating;
                 }
             }
 
@@ -112,6 +113,10 @@ namespace NeedALiftAPI.Services
         public void Update(LiftConfirmation confirmation) =>
             _requests.ReplaceOne(lift => lift.Id == confirmation.Id,confirmation);
 
+        //public void UpdatePeople(string id)
+        //{
+        //    var lift = _lifts.Find(x => x.Id == id).FirstOrDefault();
+        //}
         public void Remove(RequestLift liftIn) =>
             _lifts.DeleteOne(lift => lift.Id == liftIn.Id);
 

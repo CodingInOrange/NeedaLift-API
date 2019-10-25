@@ -236,6 +236,7 @@ namespace NeedALiftAPI.Controllers
             }
 
             _liftservice.Update(liftIn);
+            //_liftservice.
 
             return Ok(new { message = "You have accepted the lift request!" }); 
         }
