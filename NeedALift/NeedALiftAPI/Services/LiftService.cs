@@ -113,15 +113,31 @@ namespace NeedALiftAPI.Services
         public void Update(LiftConfirmation confirmation) =>
             _requests.ReplaceOne(lift => lift.Id == confirmation.Id,confirmation);
 
-        //public void UpdatePeople(string id)
-        //{
-        //    var lift = _lifts.Find(x => x.Id == id).FirstOrDefault();
-        //}
+        public RequestLift UpdatePeople(string id)
+        {
+            var lift = _lifts.Find(x => x.Id == id).FirstOrDefault();
+
+            if(Convert.ToInt32(lift.Taken) >= Convert.ToInt32(lift.People))
+            {
+                return null;
+            }
+            else
+            {
+                var filter = Builders<RequestLift>.Filter.Eq("Id", lift.Id);
+                var update = Builders<RequestLift>.Update.Set("Taken", lift.Taken + 1);
+                var check =_lifts.UpdateOne(filter, update);
+
+                return lift;
+            }
+            
+        }
         public void Remove(RequestLift liftIn) =>
             _lifts.DeleteOne(lift => lift.Id == liftIn.Id);
 
         public void RemoveConf(string liftIn) =>
         _requests.DeleteOne(lift => lift.Id == liftIn);
+        public void RemoveEntConf(string liftIn) =>
+        _requests.DeleteOne(lift => lift.LiftId == liftIn);
 
         public void Remove(string id) =>
             _lifts.DeleteOne(lift => lift.Id == id);

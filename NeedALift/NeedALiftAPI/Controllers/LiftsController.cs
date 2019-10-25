@@ -236,7 +236,11 @@ namespace NeedALiftAPI.Controllers
             }
 
             _liftservice.Update(liftIn);
-            //_liftservice.
+
+            if(_liftservice.UpdatePeople(liftIn.LiftId) == null)
+            {
+                return Ok(new { message = "You do not have any space left to accept this lift" });
+            }
 
             return Ok(new { message = "You have accepted the lift request!" }); 
         }
@@ -252,6 +256,7 @@ namespace NeedALiftAPI.Controllers
             }
 
             _liftservice.Remove(lift.Id);
+            _liftservice.RemoveEntConf(lift.Id);
 
             return NoContent();
         }
