@@ -154,8 +154,14 @@ namespace NeedALiftAPI.Services
         {
             try
             {
-                var notify = _requests.Find(x => x.UserIdCreated == id).ToListAsync();
-                return await notify;
+                var notify = await _requests.Find(x => x.UserIdCreated == id).ToListAsync();
+
+                foreach(var item in notify)
+                {
+                    var user = _users.Find(x => x.UserId == item.UserIdRequested).FirstOrDefault();
+                    item.RequestedRating = user.Rating;
+                }
+                return notify;
             }
             catch(Exception e)
             {
