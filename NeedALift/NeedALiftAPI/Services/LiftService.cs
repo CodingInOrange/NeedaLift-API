@@ -124,7 +124,7 @@ namespace NeedALiftAPI.Services
             else
             {
                 var filter = Builders<RequestLift>.Filter.Eq("Id", lift.Id);
-                var update = Builders<RequestLift>.Update.Set("Taken", lift.Taken + 1);
+                var update = Builders<RequestLift>.Update.Set("Taken",Convert.ToInt32(lift.Taken) + 1);
                 var check =_lifts.UpdateOne(filter, update);
 
                 return lift;
