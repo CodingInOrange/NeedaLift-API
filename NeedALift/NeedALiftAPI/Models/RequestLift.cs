@@ -22,6 +22,7 @@ namespace NeedALiftAPI.Models
 
         public string Date { get; set; }
         public string Time { get; set; }
+        public string Taken { get; set; }
         public int People { get; set; }
         public string Cost { get; set; }
         public string Comment { get; set; }
